@@ -1,0 +1,325 @@
+\documentclass{sig-alternate}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tikz}
+
+\usetikzlibrary{arrows,decorations.markings,positioning,fit,shapes,calc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A square shaped arrow
+% The arrow has been renamed to squarea to avoid conflict with the square arrow
+% defined in the CVS version of PGF
+\newdimen\arrowsize
+\pgfarrowsdeclare{squarea}{squarea}
+{
+  \arrowsize=0.4pt
+  \advance\arrowsize by.275\pgflinewidth%
+  \pgfarrowsleftextend{+-\arrowsize}
+  \advance\arrowsize by.5\pgflinewidth
+  \pgfarrowsrightextend{+\arrowsize}
+}
+{
+  \arrowsize=0.4pt
+  \advance\arrowsize by.275\pgflinewidth%
+  \pgfsetdash{}{+0pt}
+  \pgfsetroundjoin
+  \pgfpathmoveto{\pgfqpoint{1\arrowsize}{4\arrowsize}}
+  \pgfpathlineto{\pgfqpoint{-7\arrowsize}{4\arrowsize}}
+  \pgfpathlineto{\pgfqpoint{-7\arrowsize}{-4\arrowsize}}
+  \pgfpathlineto{\pgfqpoint{1\arrowsize}{-4\arrowsize}}
+  \pgfpathclose
+  \pgfusepathqfillstroke
+}
+% A open square shaped arrow
+
+\pgfarrowsdeclare{open squarea}{open squarea}%{{-.5bp}{8.5bp}}
+{
+  \arrowsize=0.4pt
+  \advance\arrowsize by.275\pgflinewidth%
+  \pgfarrowsleftextend{+-.5\pgflinewidth}
+  \advance\arrowsize by7\arrowsize
+  \advance\arrowsize by.5\pgflinewidth
+  \pgfarrowsrightextend{+\arrowsize}
+}
+{
+  \arrowsize=0.4pt
+  \advance\arrowsize by.275\pgflinewidth%
+  \pgfsetdash{}{+0pt}
+  \pgfsetroundjoin
+  \pgfpathmoveto{\pgfqpoint{8\arrowsize}{4\arrowsize}}
+  \pgfpathlineto{\pgfqpoint{0\arrowsize}{4\arrowsize}}
+  \pgfpathlineto{\pgfqpoint{0\arrowsize}{-4\arrowsize}}
+  \pgfpathlineto{\pgfqpoint{8\arrowsize}{-4\arrowsize}}
+  \pgfpathclose
+  \pgfusepathqstroke
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A circle and diamond shape
+\makeatletter
+\newdimen\tempa
+\newdimen\tempb
+\pgfdeclareshape{diamond in circle}{
+\inheritsavedanchors[from=diamond] % this is a diamond
+\inheritsavedanchors[from=circle] % this is a circle
+\inheritanchorborder[from=circle]
+\inheritanchor[from=circle]{center}
+\inheritanchor[from=circle]{radius}
+\inheritanchor[from=circle]{north}
+\inheritanchor[from=circle]{south}
+\inheritanchor[from=circle]{east}
+\inheritanchor[from=circle]{west}
+\inheritanchor[from=circle]{anchorborder}
+  \saveddimen\radius{%
+    %
+    % Caculate ``height radius''
+    %
+    \pgf@ya=.5\ht\pgfnodeparttextbox%
+    \advance\pgf@ya by.5\dp\pgfnodeparttextbox%
+    \pgfmathsetlength\pgf@yb{\pgfkeysvalueof{/pgf/inner ysep}}%
+    \advance\pgf@ya by\pgf@yb%
+    %
+    % Caculate ``width radius''
+    %
+    \pgf@xa=.5\wd\pgfnodeparttextbox%
+    \pgfmathsetlength\pgf@xb{\pgfkeysvalueof{/pgf/inner xsep}}%
+    \advance\pgf@xa by\pgf@xb%
+    %
+    % Calculate length of radius vector:
+    %
+    \pgf@process{\pgfpointnormalised{\pgfqpoint{\pgf@xa}{\pgf@ya}}}%
+    \ifdim\pgf@x>\pgf@y%
+        \c@pgf@counta=\pgf@x%
+        \ifnum\c@pgf@counta=0\relax%
+        \else%
+          \divide\c@pgf@counta by 255\relax%
+          \pgf@xa=16\pgf@xa\relax%
+          \divide\pgf@xa by\c@pgf@counta%
+          \pgf@xa=16\pgf@xa\relax%
+        \fi%
+      \else%
+        \c@pgf@counta=\pgf@y%
+        \ifnum\c@pgf@counta=0\relax%
+        \else%
+          \divide\c@pgf@counta by 255\relax%
+          \pgf@ya=16\pgf@ya\relax%
+          \divide\pgf@ya by\c@pgf@counta%
+          \pgf@xa=16\pgf@ya\relax%
+        \fi%
+    \fi%
+    \pgf@x=\pgf@xa%
+    %
+    % If necessary, adjust radius so that the size requirements are
+    % met:
+    %
+    \pgfmathsetlength{\pgf@xb}{\pgfkeysvalueof{/pgf/minimum width}}%
+    \pgfmathsetlength{\pgf@yb}{\pgfkeysvalueof{/pgf/minimum height}}%
+    \ifdim\pgf@x<.5\pgf@xb%
+        \pgf@x=.5\pgf@xb%
+    \fi%
+    \ifdim\pgf@x<.5\pgf@yb%
+        \pgf@x=.5\pgf@yb%
+    \fi%
+    %
+    % Now, add larger of outer sepearations.
+    %
+    \pgfmathsetlength{\pgf@xb}{\pgfkeysvalueof{/pgf/outer xsep}}%
+    \pgfmathsetlength{\pgf@yb}{\pgfkeysvalueof{/pgf/outer ysep}}%
+    \ifdim\pgf@xb<\pgf@yb%
+      \advance\pgf@x by\pgf@yb%
+    \else%
+      \advance\pgf@x by\pgf@xb%
+    \fi%
+  }
+\backgroundpath{
+    \tempa=\radius
+    \pgfmathsetlength{\pgf@xb}{\pgfkeysvalueof{/pgf/outer xsep}}%
+    \pgfmathsetlength{\pgf@yb}{\pgfkeysvalueof{/pgf/outer ysep}}%
+    \ifdim\pgf@xb<\pgf@yb%
+      \advance\tempa by-\pgf@yb%
+    \else%
+      \advance\tempa by-\pgf@xb%
+    \fi%
+    \pgfpathmoveto{\centerpoint\advance\pgf@x by\radius}%
+    \pgfpathlineto{\centerpoint\advance\pgf@y by\radius}%
+    \pgfpathlineto{\centerpoint\advance\pgf@x by-\radius}%
+    \pgfpathlineto{\centerpoint\advance\pgf@y by-\radius}%
+    \pgfpathclose%
+  }
+\behindbackgroundpath{
+    \tempa=\radius%
+    \pgfmathsetlength{\pgf@xb}{\pgfkeysvalueof{/pgf/outer xsep}}%
+    \pgfmathsetlength{\pgf@yb}{\pgfkeysvalueof{/pgf/outer ysep}}%
+    \ifdim\pgf@xb<\pgf@yb%
+      \advance\tempa by-\pgf@yb%
+    \else%
+      \advance\tempa by-\pgf@xb%
+    \fi%
+    \pgfpathcircle{\centerpoint}{\tempa}%
+  }
+}
+\makeatother
+
+
+\newcommand{\parameter}[1]{$\langle\mbox{#1}\rangle$}
+%\usepackage{flushend}
+\begin{document}
+
+  \tikzset{
+  every transaction/.style = {fill=white!100},
+  transaction/.style = {diamond in circle, draw, minimum size=6mm, every transaction},
+  every actor role/.style = {},
+  actor role/.style = {rectangle, draw=black!80, ultra thick,
+      minimum size = 6mm, every actor role},
+  composite actor role/.style = {fill=gray!80, actor role},
+  elementary actor role/.style = {fill=white!100, actor role},
+  initiator/.style = {-},
+  executor/.style = {decoration={markings,mark=at position 0.6 with %
+    {\arrow[scale=3,>=stealth]{<}}},postaction={decorate}},
+  executorreverse/.style = {decoration={markings,mark=at position 1 with %
+      {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}},
+  system/.style = {rectangle, fill=white!100, ultra thick, draw=black!80,
+              minimum height=60mm, minimum width=3cm,outer sep=0pt}}
+
+
+
+\title{Elastic Coin: A Decentralized, Crypto Currency Driven Market for Computational Resources}
+
+
+\numberofauthors{1} %  in this sample file, there are a *total*
+
+\author{
+\alignauthor%
+Evil-Knievel and many others
+}
+
+\maketitle
+\begin{abstract}
+Elastic Coin provides the infrastructure for a decentralized and distributed computation of arbitrary tasks over the internet.
+In this context, Elastic Coin is built on-top of a crypto currency and provides a market-based mechanism to buy and sell computational resources. Buyers, those who need computational resources, model their problem using Elastic Coin's software development kit and broadcast it, along with a certain amount of ELC coins, to the network. The so-called miners are then motivated to offer their computational resources in exchange for a portion of those ELC coins. The size of this portion depends on the amount of work a miner has contributed in relation to the rest of the network. Using ELC as the driving force, Elastic Coin offers potential buyers a large parallel computation cluster composed of many CPUs, GPUs, FPGAs and other devices supplied by the miners. All at a fair and market-driven price.
+
+\end{abstract}
+
+\section{Introduction}
+\label{intro}
+The number of internet users has increased more than tenfold from 1999 to 2016.
+With an increasing number of users, the number of devices---each equipped with a processor---that is connected to the Internet increases as well.
+As most of these users are within the scope of non-techincal and normal user activity, it can be assumed that, at any given moment, most of these devices are idle.
+It is not a new idea to bundle these idle processors and distribute the computational resources among various problems that require large computational power \cite{anderson2004boinc,anderson2002seti}. In fact, this movement has enabled previously infeasible research to be accomplished. Furthermore, with the growing adoption of crypto currencies such as Bitcoin \cite{nakamoto2008bitcoin}, where solving puzzles that are intentionally designed to be resource-intensive is rewarded with a certain number of coins, \emph{supercomputing} becomes more and more relevant to the regular user.
+
+Because each of these devices is owned by a different entity with different motivations and goals, there is no a-priori motivation for cooperation.
+Current approaches such as~\cite{anderson2004boinc,anderson2002seti} rely on the enthusiasm that users may develop for one or more interesting projects and so voluntarily share their computational resources with them.
+However, this scheme does not work well (efficently) in general.
+More precisely, there must be some kind of motivation for the ordinary user to contribute their computational resources to a global supercomputer that solves arbitrary tasks that do not necessarily pursue their own particular interests.
+
+In this paper, we suggest a system that is built around a crypto currency termed \emph{Elastic Coin} and addresses these difficulties.
+More precisely, Elastic Coin constitutes a market that matches buyers and sellers of computational resources according to economic criteria.
+Buyers, in this context, are those who demand computational resources in order to solve some arbitrary and computationally intensive task.
+They submit their task to the network and attach a certain amount of ELC---that is the currency of Elastic Coin---to it.
+Then, sellers, in the remainder of the paper termed \emph{miners}, are then motivated to offer their computational resources for solving these tasks in exchange for a portion of the attached ELC.
+The size of this portion depends on the amount of work a miner has contributed in relation to the rest of the network.
+All this happens ``behind the scenes'' in a process termed \emph{mining} without the requirement of manual intervention.
+
+The remainder of this paper is structured as follows:
+Section 2 presents the general idea of a decentralized and market-based infrastructure for decentralized and distributed computation of arbitrary tasks over the internet. Section 3 and Section 4 discuss how these ideas can be embedded into the context of crypto currencies where security and reliability require special attention. Section 5 concludes the paper.
+\section{Design (pending work)}
+
+\subsection{The Big Picture}
+
+Pensing, see Figure~\ref{tab:trt_datd}.
+
+\begin{figure}
+\centering
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\begin{tikzpicture}[node distance=1cm, on grid]
+    \begin{pgfonlayer}{background}
+        \node [system] (system) at (0,3){};
+    \end{pgfonlayer}
+    \node [composite actor role] (CA01) [minimum height=48mm] at ( -3.5,3) {CA01};
+    \node [above] at (CA01.north) {Miners};
+    \node [transaction] (T02) at( $(system.south west)!.66!(system.north west)$)
+        {T02} edge [initiator] (CA01.south east |- T02);
+
+    \node [composite actor role] (CA03) at ( $(system.south)!.66!(system.north)$)
+        {CA03} edge [executor] (T02);
+    \node [above] at (CA03.north) {Market};
+    \node [transaction] (T01) at ( $(system.south east)!.66!(system.north east)$)
+        {T01} edge  [initiator] (CA03);
+
+    \node [transaction] (T03) at( $(system.south west)!.44!(system.north west)$)
+            {T03} edge [initiator] (CA01.south east |- T03);
+    \draw [transaction,decoration={markings,mark=at position 1 with %
+      {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (CA03.south) to[bend left] node {} (T03);
+
+
+
+
+
+
+    \path (T01)++(2,0) node [composite actor role] (CA02) [minimum height=24mm]
+        {CA02} edge  [executorreverse] (T01);
+    \node [above] at (CA02.north) {Buyers};
+    \node [transaction] (T04) at ( $(system.south west)!.22!(system.north west)$)
+        {T04} edge  [initiator] (CA01.south east |- T04);
+    \node [composite actor role] (CA04) at ( $(system.south)!.22!(system.north)$)
+        {CA04} edge  [executor] (T04);
+    \node [above] at (CA04.north) {Transactions};
+\end{tikzpicture}
+\\[2em]
+    \begin{tabular}{@{T}l@{ }l@{ }p{4cm}}
+        \toprule
+        ID & Transaction Description\\
+        \midrule
+        01 & Submits work to market to be solved by the network \\
+        02 & Proof-of-work issued periodically by miners\\
+        03 & Rewarding the miners proportionally to the work done\\
+        04 & Regular transaction (such as sending ELC)\\
+        \bottomrule
+    \end{tabular}\label{tab:trt_datd}
+    \caption{Global ATD}
+\end{figure}
+
+\subsection{Mining and the Faster Algorithm Attack}
+
+The security of Bitcoin relies on the distributed consensus achieved by a process termed \emph{mining}.
+In the original Bitcoin scheme, \emph{miners} essentially are users who spend a large amount of computational resources to solve a certain type of cryptographic puzzle \cite{nakamoto2008bitcoin}.
+The solutions to these cryptographic puzzles allow for the generation of so-called \emph{blocks}. Users, in this context, are encouraged to mine blocks by rewarding each block with a payment of currently $25$~BTC.
+Blocks are ordered in a linked list and both verify the correctness of bitcoin transactions and form a consensus in terms of a history of transactions that all participants agree upon.
+In Bitcoin this history is termed \emph{Blockchain} and aims for preventing fraudulent behavior such as double spending a coin multiple times \cite{karame2012double} or charging back already done transactions.
+More precisely, this history is defined to be the \emph{longest chain} of blocks from the genesis block (that is, the first block) to the current block.
+Of course, it may happen here that multiple side chains emerge from one block of which the longest  eventually survives reverting the transactions included in the shorter.
+In order to be on the safe sides in terms of random reorganizations, users are suggested to wait until the transaction has been added to a block and $z$ blocks have been linked to it \cite{nakamoto2008bitcoin}. That means, the transaction has received $z + 1$ confirmations.
+The only way for an attacker to remove one of his transactions from the longest chain in order to take back money he recently spent is to create an alternative longest chain himself that does not contain the particular transaction.
+In this context the attacker would start calculating an alternative chain from a point where he still owned the spent coins (in this case more than $z + 1$ behind the current block).
+In order to be successful, he must (on average) calculate blocks faster than the rest of the network working on the original longest chain.
+More formally, the probability of an attacker catching up is analogous to the Gambler's Ruin problem \cite{feller2008introduction,nakamoto2008bitcoin}.
+That is, let $q$ be the probability the attacker finds the next block and $p$ denote the probability that the rest of the network finds the next block.
+\begin{equation*}
+   q_z =
+   \begin{cases}
+     1 & \text{for } p \textless q \\
+     (\frac{q}{p})^z & \text{for } p \geq q \\
+   \end{cases}
+\end{equation*}
+denotes the probability that an attacker can catch up building an alternative chain from $z$ blocks behind.
+As the probability of finding a block increases linearly with the calculation power invested in solving the cryptographic puzzles, it can be assumed that an attacker can successfully perform this attack (in literature referred to as the $51$~\% attack \cite{eyal2014majority,vasek2014empirical}) once he controls more than $50$~\% of the entire network's calculation power.
+Putting aside large mining pools, it is not economical from an attacker's point of view to acquire more than $50$~\% of the networks calculation power.
+In this paper we suggest a crypto currency-driven market for computational resources. As described in Section \ref{intro} the key idea is to working towards solving arbitrary computationally expensive tasks and in exchange get rewarded with a certain amount of ELC.
+This scheme is very similar to the Bitcoin mining process.
+An obvious and appealing idea is to utilize the immense amount of work put into solving these arbitrary tasks and use it to form the consensus, i.e., ensure the security of the blockchain, itself. In this particular case, however, the $51$~\% attack could be pulled off by an attacker with considerably less resources than required in the case of Bitcoin. This attack has been identified and thoroughly discussed by members of the Elastic Coin community and called \emph{The Faster Algorithm Attack} (FAA).
+Without loss of generality, imagine an attacker hand crafts an algorithm with a complexity of $\mathcal{O}(P)$ with $P \in \Omega(N)$ bounded below by $N$ asymptotically.
+Furthermore, assume he knows an alternative algorithm which produces the same results but can be run in $\mathcal{O}(Z)$ with $Z \in \text{o}(N)$ being dominated by $N$ asymptotically.
+When such an algorithm is submitted to the Elastic Coin network to be solved by the miners, the attacker needs significantly less resources to have the equivalent of $50$~\% of the networks calculation power. More precisely, he needs only $O(\frac{P}{Z})$ of the network's calculation power.
+To give a concrete example: imagine an attacker submits an algorithm with a complexity of $\mathcal{O}(2^N)$ while at the same time he knows an algorithm producing the same output with a complexity of $O(1)$. He then only needs $O(\frac{1}{2^N})$ of the entire network's calculation power to successfully perform the $51$~\% attack.
+In the remainder of the paper we will show how this attack can be mitigated.
+
+\section*{Acknowledgement}
+
+I would like to express my sincere gratitude to everyone who has contributed to this paper with his encouragement and consistent involvement. This includes bitcointalk members ...
+
+
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+
+\end{document}

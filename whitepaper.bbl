@@ -1,0 +1,44 @@
+\begin{thebibliography}{1}
+
+\bibitem{anderson2004boinc}
+D.~P. Anderson.
+\newblock Boinc: A system for public-resource computing and storage.
+\newblock In {\em Grid Computing, 2004. Proceedings. Fifth IEEE/ACM
+  International Workshop on}, pages 4--10. IEEE, 2004.
+
+\bibitem{anderson2002seti}
+D.~P. Anderson, J.~Cobb, E.~Korpela, M.~Lebofsky, and D.~Werthimer.
+\newblock Seti@home: an experiment in public-resource computing.
+\newblock {\em Communications of the ACM}, 45(11):56--61, 2002.
+
+\bibitem{eyal2014majority}
+I.~Eyal and E.~G. Sirer.
+\newblock Majority is not enough: Bitcoin mining is vulnerable.
+\newblock In {\em Financial Cryptography and Data Security}, pages 436--454.
+  Springer, 2014.
+
+\bibitem{feller2008introduction}
+W.~Feller.
+\newblock {\em An introduction to probability theory and its applications},
+  volume~2.
+\newblock John Wiley \& Sons, 2008.
+
+\bibitem{karame2012double}
+G.~O. Karame, E.~Androulaki, and S.~Capkun.
+\newblock Double-spending fast payments in bitcoin.
+\newblock In {\em Proceedings of the 2012 ACM conference on Computer and
+  communications security}, pages 906--917. ACM, 2012.
+
+\bibitem{nakamoto2008bitcoin}
+S.~Nakamoto.
+\newblock Bitcoin: A peer-to-peer electronic cash system.
+\newblock {\em Consulted}, 1(2012):28, 2008.
+
+\bibitem{vasek2014empirical}
+M.~Vasek, M.~Thornton, and T.~Moore.
+\newblock Empirical analysis of denial-of-service attacks in the bitcoin
+  ecosystem.
+\newblock In {\em Financial cryptography and data security}, pages 57--71.
+  Springer, 2014.
+
+\end{thebibliography}
