@@ -221,11 +221,15 @@ All this happens ``behind the scenes'' in a process termed \emph{mining} without
 
 The remainder of this paper is structured as follows:
 Section 2 presents the general idea of a decentralized and market-based infrastructure for decentralized and distributed computation of arbitrary tasks over the internet. Section 3 and Section 4 discuss how these ideas can be embedded into the context of crypto currencies where security and reliability require special attention. Section 5 concludes the paper.
-\section{Design (pending work)}
+\section{Design}
 
 \subsection{The Big Picture}
 \label{bigpic}
-Pending, see Figure~\ref{tab:trt_datd}.
+The general flow is sketched in Figure~\ref{tab:trt_datd}.
+Elastic is a network which targets scientists and others who are in need of large amounts of computational power. These entities, we call them \emph{buyers}, program their desired arbitrary task $T(x_1,\ldots,x_k)$---mostly this will be a program or algorithm that pursues a certain goal such as mining blocks for a different coin, finding prime numbers, or anything else---and publish it to the network. In this context they pay three amounts: transaction fee $F$ which goes to the miner who finds a block (see below), a reward fee $R = x \cdot p$ which is composed of the number of units of computation $x$ purchased and a price per unit of computation $p$ and a bounty fee $B$ which is rewarded to the miners once they find a relevant solution. In this context we have to differ between rewards and bounties. Rewards are paid out to the miners periodically when they provide so-called proof-of-works and thereby show that they have invested computational resources.
+Bounties are paid out to those who provide an input $x_1,\ldots,x_k$ to $T$ so that its output $[y_1,\ldots,y_l] = T(xi,\ldots,x_k)$ is in some way relevant to the buyer (not to the network). The relevance can be described by a hook function, a function that is provided by the buyer and takes $[y_1,\ldots,y_l]$ as an input and returns true if the output is relevant, and false in all other cases.
+Tasks are then worked off by the miners. In this case, the tasks with the highest per unit computation price $p$ are worked off first. Miners work on the task by periodically providing proof-of-works and so proving the amount of computational power they invest. For every proof-of-work they are credited $p$ coint. Once all $R$ coins are given away to the miners(that is after $x$ proof of works), the task is removed and no longer worked on. If a miner finds an input $x_1,\ldots,x_k$ to $T$ so that its output $[y_1,\ldots,y_l] = T(xi,\ldots,x_k)$ is in some way relevant to the buyer, he gets credited the bounty $B$. If this happens before all $R$ coins are distributed, the task remains active. If all coins $R$ are distributed before the bounty $B$ has been given away, it gets returned to the buyer.
+Blocks themselves are generated using proof-of-stake. This is neccessary to disconnect the block generation from the arbitrary tasks that are provided externally. The reasons are covered in the remainder of this paper.
 
 \begin{figure}
 \centering
