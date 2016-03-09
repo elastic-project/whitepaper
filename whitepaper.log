@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.19)  9 MAR 2016 13:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.19)  9 MAR 2016 13:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -709,11 +709,7 @@ Overfull \hbox (4.47983pt too wide) in paragraph at lines 270--280
 
 LaTeX Warning: Command \textless invalid in math mode on input line 307.
 
-[2]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-(./whitepaper.bbl) [3] (./whitepaper.aux) ) 
+[2] (./whitepaper.bbl) [3] (./whitepaper.aux) ) 
 Here is how much of TeX's memory you used:
  16191 strings out of 493054
  340833 string characters out of 6140586
@@ -722,18 +718,18 @@ Here is how much of TeX's memory you used:
  49155 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,71p,1112b,1131s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvi
-ps/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb>
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-dist/fonts/type1/urw
-/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb
-></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
-Output written on whitepaper.pdf (3 pages, 149698 bytes).
+{/usr/share/texmf-dist/fonts/enc
+/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.
+pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/
+share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></us
+r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-dist/fonts/type1
+/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a
+.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
+Output written on whitepaper.pdf (3 pages, 149973 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  48 compressed objects within 1 object stream

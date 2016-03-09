@@ -321,7 +321,8 @@ To give a concrete example: imagine an attacker submits an algorithm with a comp
 
 The only incentive to perform this attack is to pull of the $51$~\% attack.
 We eliminate this incentive by entirely disconnecting the calculation of arbitrary tasks from the security of the blockchain. In this context we suggest a pure proof-of-stake scheme \cite{king2012ppcoin} for the block generation. The proof-of-work scheme is used only for the measurement of who has contributed how much work the payments of the proportional rewards.
-Performing the FAA as it is described above would correspond to an attacker which can solve \emph{his own} work quicker than everyone else and so get paid his own money (subtracted by a small fee to prevent DDOS in this context). 
+Performing the FAA as it is described above would correspond to an attacker which can solve \emph{his own} work quicker than everyone else and so get paid his own money (subtracted by a small fee to prevent DDOS in this context). This is not dangerous from the network's point of view.
+In order to maintain a certain degree of incentive to generate proof-of-stake blocks instead of just focusing on the calculation of proof-of-works we have decided to credit the proof-of-stake block with all transaction fees that are included in that particular block.
 
 \subsection{Reliably Measuring Proof-of-Work on Arbitrary Functions}
 
