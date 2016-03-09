@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{booktabs}
 \usepackage{tikz}
+\usepackage[keeplastbox]{flushend}
 
 \usetikzlibrary{arrows,decorations.markings,positioning,fit,shapes,calc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -328,7 +329,7 @@ We eliminate this incentive by entirely disconnecting the calculation of arbitra
 Performing the FAA as it is described above would correspond to an attacker which can solve \emph{his own} work quicker than everyone else and so get paid his own money (subtracted by a small fee to prevent DDOS in this context). This is not dangerous from the network's point of view.
 In order to maintain a certain degree of incentive to generate proof-of-stake blocks instead of just focusing on the calculation of proof-of-works we have decided to credit the proof-of-stake block with all transaction fees that are included in that particular block.
 
-\subsection{Reliably Measuring Proof-of-Work on Arbitrary Functions}
+\subsection{Reliably Measuring Proof-of-Work\\For Arbitrary Functions}
 
 As already pointed out in Section~\ref{bigpic} our goal is to reward \emph{miners} for contributing their computational resources for calculating arbitrary tasks that have been provided by other Elastic network users. In this context it is wished for that the users get rewarded a certain amount of Elastic Coins which is proportional to the amount of resources they have contributed in comparison to the rest of the network. For this to work, it is required to have a reliable and tamper-proof way to measure (and verify) the work that has been put into calculating such task. Additionally, as it can be assumed that the termination of a piece of arbitrary code can neither be predicted nor guaranteed, we need a fine-granulated proof-of-work feedback to avoid a too high variance. That is, miners shall be allowed to periodically submit proof-of-works \emph{while} the arbtrary task is being executed. One can think of this as sub-dividing the large arbitrary task into many sub-tasks of fixed size where the output of subtask $S_k$ costitutes the input to the subtask $S_{k+1}$.
 
@@ -341,6 +342,9 @@ computing $T(x_1,\ldots,x_k)$ itself. Everything else would expose the Elastic n
 
 As, in our scheme, users are rewarded for contributing computational power, this proof-of-work must be secure. Otherwise, it can be assumed that dishonest users will find ways to return plausible results without performing any actual work. To solve this problem, we rely on a method that has been introduced by \cite{ben2013snarks}. More precisely, we rely on zkSNARK (zer-knowledge Succinct Non-interactive ARgument of Knowledge) schemes \cite{bitansky2013succinct,bitansky2012extractable,ben2014succinct}, which are a cryptographic method of verifying the integrity of arbitrary computations. \textbf{NOTE: Not sure if we should write how that works here or just refer to the paper?}.
 
+This does not solve the mid-execution feedbacks, that allow for a more fine-granulated payout of rewards yet. That is, we also want to payout \emph{weaker} miners that not necessarily manage to calculate the arbitrary task until the end (or termination) before others have already consumed all $R$ reward coins. To mitigate this problem we need a way for everyone to constantly and periodically provide proof-of-works for sub-portions of the arbitrary task.
+We suggest to adapt the scheme described above as follows:
+\textbf{NOTE: Writing that portion in the next hour?}.
 
 \section*{Acknowledgement}
 
