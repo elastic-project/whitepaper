@@ -7,45 +7,45 @@ Repeated entry---line 124 of file sigproc.bib
  : @article{king2012ppcoin
  :                        ,
 I'm skipping whatever remains of this entry
-You've used 13 entries,
+You've used 9 entries,
             2118 wiz_defined-function locations,
-            570 strings with 5996 characters,
-and the built_in function-call counts, 5283 in all, are:
-= -- 540
-> -- 226
-< -- 9
-+ -- 90
-- -- 76
-* -- 331
-:= -- 817
-add.period$ -- 45
-call.type$ -- 13
-change.case$ -- 75
+            549 strings with 5065 characters,
+and the built_in function-call counts, 3152 in all, are:
+= -- 321
+> -- 124
+< -- 5
++ -- 50
+- -- 40
+* -- 189
+:= -- 502
+add.period$ -- 30
+call.type$ -- 9
+change.case$ -- 45
 chr.to.int$ -- 0
-cite$ -- 13
-duplicate$ -- 231
-empty$ -- 427
-format.name$ -- 76
-if$ -- 1176
+cite$ -- 9
+duplicate$ -- 139
+empty$ -- 265
+format.name$ -- 40
+if$ -- 695
 int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 13
-newline$ -- 67
-num.names$ -- 26
-pop$ -- 102
+int.to.str$ -- 9
+missing$ -- 9
+newline$ -- 47
+num.names$ -- 18
+pop$ -- 60
 preamble$ -- 1
-purify$ -- 63
+purify$ -- 37
 quote$ -- 0
-skip$ -- 174
+skip$ -- 104
 stack$ -- 0
-substring$ -- 321
-swap$ -- 82
-text.length$ -- 9
+substring$ -- 178
+swap$ -- 42
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 50
+type$ -- 34
 warning$ -- 0
-while$ -- 53
-width$ -- 15
-write$ -- 149
+while$ -- 33
+width$ -- 10
+write$ -- 102
 (There was 1 error message)

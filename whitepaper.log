@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.19)  9 MAR 2016 14:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.19)  9 MAR 2016 15:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -733,16 +733,16 @@ LaTeX Warning: Command \textless invalid in math mode on input line 312.
 
 [2] (./whitepaper.bbl [3])
 - LAST -
-Extra skip:20.0pt
-Left:256.5pt/1.74596pt
-Right:236.5pt/1.74596pt
-Output:256.75pt
+Extra skip:10.5pt
+Left:118.0pt/1.74596pt
+Right:107.5pt/1.74596pt
+Output:118.0pt
  [4] (./whitepaper.aux) ) 
 Here is how much of TeX's memory you used:
- 16573 strings out of 493054
- 345822 string characters out of 6140586
- 424271 words of memory out of 5000000
- 19723 multiletter control sequences out of 15000+600000
+ 16569 strings out of 493054
+ 345743 string characters out of 6140586
+ 424250 words of memory out of 5000000
+ 19719 multiletter control sequences out of 15000+600000
  49155 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,71p,1112b,1131s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -757,7 +757,7 @@ ts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti9.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.p
 fb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb>
-Output written on whitepaper.pdf (4 pages, 155141 bytes).
+Output written on whitepaper.pdf (4 pages, 150873 bytes).
 PDF statistics:
  69 PDF objects out of 1000 (max. 8388607)
  50 compressed objects within 1 object stream
