@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{anderson2004boinc}
 D.~P. Anderson.
@@ -10,6 +10,36 @@ D.~P. Anderson.
 D.~P. Anderson, J.~Cobb, E.~Korpela, M.~Lebofsky, and D.~Werthimer.
 \newblock Seti@home: an experiment in public-resource computing.
 \newblock {\em Communications of the ACM}, 45(11):56--61, 2002.
+
+\bibitem{back2002hashcash}
+A.~Back et~al.
+\newblock Hashcash-a denial of service counter-measure, 2002.
+
+\bibitem{ben2013snarks}
+E.~Ben-Sasson, A.~Chiesa, D.~Genkin, E.~Tromer, and M.~Virza.
+\newblock Snarks for c: Verifying program executions succinctly and in zero
+  knowledge.
+\newblock In {\em Advances in Cryptology--CRYPTO 2013}, pages 90--108.
+  Springer, 2013.
+
+\bibitem{ben2014succinct}
+E.~Ben-Sasson, A.~Chiesa, E.~Tromer, and M.~Virza.
+\newblock Succinct non-interactive zero knowledge for a von neumann
+  architecture.
+\newblock In {\em 23rd USENIX Security Symposium (USENIX Security 14)}, pages
+  781--796, 2014.
+
+\bibitem{bitansky2012extractable}
+N.~Bitansky, R.~Canetti, A.~Chiesa, and E.~Tromer.
+\newblock From extractable collision resistance to succinct non-interactive
+  arguments of knowledge, and back again.
+\newblock In {\em Proceedings of the 3rd Innovations in Theoretical Computer
+  Science Conference}, pages 326--349. ACM, 2012.
+
+\bibitem{bitansky2013succinct}
+N.~Bitansky, A.~Chiesa, Y.~Ishai, O.~Paneth, and R.~Ostrovsky.
+\newblock Succinct non-interactive arguments via linear interactive proofs.
+\newblock In {\em Theory of Cryptography}, pages 315--333. Springer, 2013.
 
 \bibitem{eyal2014majority}
 I.~Eyal and E.~G. Sirer.
@@ -28,6 +58,11 @@ G.~O. Karame, E.~Androulaki, and S.~Capkun.
 \newblock Double-spending fast payments in bitcoin.
 \newblock In {\em Proceedings of the 2012 ACM conference on Computer and
   communications security}, pages 906--917. ACM, 2012.
+
+\bibitem{king2012ppcoin}
+S.~King and S.~Nadal.
+\newblock Ppcoin: Peer-to-peer crypto-currency with proof-of-stake.
+\newblock {\em self-published paper, August}, 19, 2012.
 
 \bibitem{nakamoto2008bitcoin}
 S.~Nakamoto.
