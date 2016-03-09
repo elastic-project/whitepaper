@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.19)  9 MAR 2016 15:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.19)  9 MAR 2016 15:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -737,10 +737,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [3]
 (./whitepaper.bbl)
 - LAST -
-Extra skip:4.25404pt
-Left:318.0pt/0.0pt
-Right:312.0pt/1.74596pt
-Output:320.84999pt
+Extra skip:26.55809pt
+Left:353.0pt/0.0pt
+Right:324.69595pt/1.74596pt
+Output:351.84798pt
  [4] (./whitepaper.aux) ) 
 Here is how much of TeX's memory you used:
  16569 strings out of 493054
@@ -761,7 +761,7 @@ ts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti9.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.p
 fb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb>
-Output written on whitepaper.pdf (4 pages, 152870 bytes).
+Output written on whitepaper.pdf (4 pages, 151087 bytes).
 PDF statistics:
  69 PDF objects out of 1000 (max. 8388607)
  50 compressed objects within 1 object stream
