@@ -11,6 +11,10 @@ D.~P. Anderson, J.~Cobb, E.~Korpela, M.~Lebofsky, and D.~Werthimer.
 \newblock Seti@home: an experiment in public-resource computing.
 \newblock {\em Communications of the ACM}, 45(11):56--61, 2002.
 
+\bibitem{back2002hashcash}
+A.~Back et~al.
+\newblock Hashcash-a denial of service counter-measure, 2002.
+
 \bibitem{eyal2014majority}
 I.~Eyal and E.~G. Sirer.
 \newblock Majority is not enough: Bitcoin mining is vulnerable.
@@ -28,6 +32,11 @@ G.~O. Karame, E.~Androulaki, and S.~Capkun.
 \newblock Double-spending fast payments in bitcoin.
 \newblock In {\em Proceedings of the 2012 ACM conference on Computer and
   communications security}, pages 906--917. ACM, 2012.
+
+\bibitem{king2012ppcoin}
+S.~King and S.~Nadal.
+\newblock Ppcoin: Peer-to-peer crypto-currency with proof-of-stake.
+\newblock {\em self-published paper, August}, 19, 2012.
 
 \bibitem{nakamoto2008bitcoin}
 S.~Nakamoto.
