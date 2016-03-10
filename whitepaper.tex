@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{booktabs}
 \usepackage{tikz}
+\usepackage[keeplastbox]{flushend}
 
 \usetikzlibrary{arrows,decorations.markings,positioning,fit,shapes,calc}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,7 +183,7 @@
 
 
 
-\title{Elastic Coin: A Decentralized, Crypto Currency Driven Market for Computational Resources}
+\title{Elastic Project: The Decentralized Supercomputer}
 
 
 \numberofauthors{1} %  in this sample file, there are a *total*
@@ -221,11 +222,15 @@ All this happens ``behind the scenes'' in a process termed \emph{mining} without
 
 The remainder of this paper is structured as follows:
 Section 2 presents the general idea of a decentralized and market-based infrastructure for decentralized and distributed computation of arbitrary tasks over the internet. Section 3 and Section 4 discuss how these ideas can be embedded into the context of crypto currencies where security and reliability require special attention. Section 5 concludes the paper.
-\section{Design (pending work)}
+\section{Design}
 
 \subsection{The Big Picture}
-
-Pensing, see Figure~\ref{tab:trt_datd}.
+\label{bigpic}
+The general flow is sketched in Figure~\ref{tab:trt_datd}.
+Elastic is a network which targets scientists and others who are in need of large amounts of computational power. These entities, we call them \emph{buyers}, program their desired arbitrary task $T(x_1,\ldots,x_k)$---mostly this will be a program or algorithm that pursues a certain goal such as mining blocks for a different coin, finding prime numbers, or anything else---and publish it to the network. In this context they pay three amounts: transaction fee $F$ which goes to the miner who finds a block (see below), a reward fee $R = x \cdot p$ which is composed of the number of units of computation $x$ purchased and a price per unit of computation $p$ and a bounty fee $B$ which is rewarded to the miners once they find a relevant solution. In this context we have to differ between rewards and bounties. Rewards are paid out to the miners periodically when they provide so-called proof-of-works and thereby show that they have invested computational resources.
+Bounties are paid out to those who provide an input $x_1,\ldots,x_k$ to $T$ so that its output $[y_1,\ldots,y_l] = T(xi,\ldots,x_k)$ is in some way relevant to the buyer (not to the network). The relevance can be described by a hook function, a function that is provided by the buyer and takes $[y_1,\ldots,y_l]$ as an input and returns true if the output is relevant, and false in all other cases.
+Tasks are then worked off by the miners. In this case, the tasks with the highest per unit computation price $p$ are worked off first. Miners work on the task by periodically providing proof-of-works and so proving the amount of computational power they invest. For every proof-of-work they are credited $p$ coint. Once all $R$ coins are given away to the miners(that is after $x$ proof of works), the task is removed and no longer worked on. If a miner finds an input $x_1,\ldots,x_k$ to $T$ so that its output $[y_1,\ldots,y_l] = T(x_1,\ldots,x_k)$ is in some way relevant to the buyer, he gets credited the bounty $B$. If this happens before all $R$ coins are distributed, the task remains active. If all coins $R$ are distributed before the bounty $B$ has been given away, it gets returned to the buyer.
+Blocks themselves are generated using proof-of-stake. This is neccessary to disconnect the block generation from the arbitrary tasks that are provided externally. The reasons are covered in the remainder of this paper.
 
 \begin{figure}
 \centering
@@ -280,11 +285,17 @@ Pensing, see Figure~\ref{tab:trt_datd}.
     \caption{Global ATD}
 \end{figure}
 
+\subsection{Proof-of-Work}
+\label{pow}
+A proof-of-work function is a \emph{challenge} which is fairly difficult to calculate but easy for others to verify. This ensures that everyone can quickly verify that a particular entity has invested a certain (arbitrarily large) amount of work into obtaining the proof-of-work.
+One of the first use-cases for proof-of-work was preventing email spam \cite{back2002hashcash}. The central idea was to use \emph{Hashcash} and require a certain amount of proof-of-work by hashing the email's content for every mail that is sent. While the cost is reasonably low on a per-email basis it grows significantly for a larger amount of emails. Mass spam mailers have a hard time providing the amount of proof-of-work required due to limited computational resources.
+The idea behind proof-of-work, particularily the idea behind Hashcash, has been adopted by Bitcoin: in order to generate a block that is accepted by the rest of the network, miners must complete a proof-of-work which covers all of the data in the block. The difficulty of the proof-of-work is dynamically adjusted to the entire network's calculation power so that---on average---it takes around $10$ minutes until one of the network participants finds a block. This process is termed \emph{mining}.
+
 \subsection{Mining and the Faster Algorithm Attack}
 
 The security of Bitcoin relies on the distributed consensus achieved by a process termed \emph{mining}.
 In the original Bitcoin scheme, \emph{miners} essentially are users who spend a large amount of computational resources to solve a certain type of cryptographic puzzle \cite{nakamoto2008bitcoin}.
-The solutions to these cryptographic puzzles allow for the generation of so-called \emph{blocks}. Users, in this context, are encouraged to mine blocks by rewarding each block with a payment of currently $25$~BTC.
+The solutions to these cryptographic puzzles (this in fact is the proof-of-work, cf. Section~\ref{pow}) allow for the generation of so-called \emph{blocks}. Users, in this context, are encouraged to mine blocks by rewarding each block with a payment of currently $25$~BTC.
 Blocks are ordered in a linked list and both verify the correctness of bitcoin transactions and form a consensus in terms of a history of transactions that all participants agree upon.
 In Bitcoin this history is termed \emph{Blockchain} and aims for preventing fraudulent behavior such as double spending a coin multiple times \cite{karame2012double} or charging back already done transactions.
 More precisely, this history is defined to be the \emph{longest chain} of blocks from the genesis block (that is, the first block) to the current block.
@@ -312,11 +323,42 @@ Without loss of generality, imagine an attacker hand crafts an algorithm with a 
 Furthermore, assume he knows an alternative algorithm which produces the same results but can be run in $\mathcal{O}(Z)$ with $Z \in \text{o}(N)$ being dominated by $N$ asymptotically.
 When such an algorithm is submitted to the Elastic Coin network to be solved by the miners, the attacker needs significantly less resources to have the equivalent of $50$~\% of the networks calculation power. More precisely, he needs only $O(\frac{P}{Z})$ of the network's calculation power.
 To give a concrete example: imagine an attacker submits an algorithm with a complexity of $\mathcal{O}(2^N)$ while at the same time he knows an algorithm producing the same output with a complexity of $O(1)$. He then only needs $O(\frac{1}{2^N})$ of the entire network's calculation power to successfully perform the $51$~\% attack.
-In the remainder of the paper we will show how this attack can be mitigated.
+
+The only incentive to perform this attack is to pull of the $51$~\% attack.
+We eliminate this incentive by entirely disconnecting the calculation of arbitrary tasks from the security of the blockchain. In this context we suggest a pure proof-of-stake scheme \cite{king2012ppcoin} for the block generation. The proof-of-work scheme is used only for the measurement of who has contributed how much work the payments of the proportional rewards.
+Performing the FAA as it is described above would correspond to an attacker which can solve \emph{his own} work quicker than everyone else and so get paid his own money (subtracted by a small fee to prevent DDOS in this context). This is not dangerous from the network's point of view.
+In order to maintain a certain degree of incentive to generate proof-of-stake blocks instead of just focusing on the calculation of proof-of-works we have decided to credit the proof-of-stake block with all transaction fees that are included in that particular block.
+
+\subsection{Reliably Measuring Proof-of-Work\\For Arbitrary Functions}
+
+As already pointed out in Section~\ref{bigpic} our goal is to reward \emph{miners} for contributing their computational resources for calculating arbitrary tasks that have been provided by other Elastic network users. In this context it is wished for that the users get rewarded a certain amount of Elastic Coins which is proportional to the amount of resources they have contributed in comparison to the rest of the network. For this to work, it is required to have a reliable and tamper-proof way to measure (and verify) the work that has been put into calculating such task. Additionally, as it can be assumed that the termination of a piece of arbitrary code can neither be predicted nor guaranteed, we need a fine-granulated proof-of-work feedback to avoid a too high variance. That is, miners shall be allowed to periodically submit proof-of-works \emph{while} the arbtrary task is being executed. One can think of this as sub-dividing the large arbitrary task into many sub-tasks of fixed size where the output of subtask $S_k$ costitutes the input to the subtask $S_{k+1}$.
+
+Before we take a look at the desired fine granularity by dividing the task into subtasks, let us focus on the calculation of the whole arbitrary task (or function) first.
+As pointed out in Section~\ref{pow}, the general idea is to allow a computationally weak entity (in our case this relates to every non-miner in the network) to outsource the computation of an arbitrary task $T(x_1,\ldots,x_k)$ to a worker with significantly higher amounts of computational power (in our case, that is the miners).
+The workers (here, miners) then return the output of the arbitrary task, e.g., $[y_1,\ldots,y_l] = T(x_1,\ldots,x_k)$ along with a proof-of-work that the computation of $T$ was carried out correctly.
+If this proof-of-work matches certain criteria (such as a certain difficulty) it is then accepted by the network and the worker is rewarded.
+As we do not necessarily know how long the calculation of $T$ actually takes, it is required that the verification of this proof requires significantly less computational effort or time than
+computing $T(x_1,\ldots,x_k)$ itself. Everything else would expose the Elastic network to a variety of DOS attacks.
+
+As, in our scheme, users are rewarded for contributing computational power, this proof-of-work must be secure. Otherwise, it can be assumed that dishonest users will find ways to return plausible results without performing any actual work. 
+Also we require mid-execution feedbacks, that allow for a more fine-granulated payout of rewards yet. That is, we also want to payout \emph{weaker} miners that not necessarily manage to calculate the arbitrary task until the end (or termination) before others have already consumed all $R$ reward coins. To mitigate this problem we need a way for everyone to constantly and periodically provide proof-of-works for sub-portions of the arbitrary task.
+We suggest to solve the problem as follows: 
+
+Assume we have a task $T$ that takes an arbitrary input $x_1,\ldots,x_k$. Furthermore, we assume are using the full Python language, so, due to the halting problem we cannot determine whether the program will terminate (and if yes, when) or not.
+Using that task $T$ we want to generate \emph{proof-of-works} on a regular basis, which, if being solved, result in a payment of $p$ coins to the miner. A requirement is that all such \emph{proof-of-works} are on average equally difficult to be created.
+To achieve that, we introduce a buffer $B$ with length $L$, that is filled as follows:
+After each executed statement, the ``number'' of the currently executed statement as well as the content of all variables that were ``touched'' (even if they have been assigned with the same value) are collected in a temporary binary string $Z$. The buffer $B$ gets then appended with $T$.
+Filling the buffer basically relates to executing the program. In fact, the buffer is assumed to be filled as a fixed rate as statements which change more variables will also take proportionately longer to execute. Statements like memory operations may cause some extra padding to the buffer as they, more likely, take longer to be executed (so they should fill the buffer more). Padding is a process whose parameters must be evaluated and seeded empirically.
+
+Once the buffer is full, the binary concatenation of buffer $B$ and the initial state at beginning of a sub-block is fed into a SHA256 function. A sub-block in the context is the fragment of code between an empty and an entirely filled Buffer and the initial state corresponds to the set of variables on the stack (including the function arguments). In fact, for practical reasons, SHA256 works sequential so this process can be performed meanwhile executing task $T$ itself. The length of the Buffer essentially defines the duration of the so-called sub-blocks. If the SHA256 hash meets a target value the miner has found a proof-of-work that is entitled to get a reward.
+
+Let us assume that each such sub-block of ask $T$ has runtime $O(N)$ with $N$ being the number of operations in it. With the buffer-related overhead which itself is in $O(N)$, the attacker actually performs work in the order of $O(2 \cdot N) = O(N)$. So even if an attacker knows a shortcut to the algorithm so that it can be run in $N-x$ operations for some $x<N$ he can at most get a constant speedup: $O((N-x)+N) = O(2 \cdot N-x) = O(N)$.
+
+This of course means, that the network is coming at an overhead in the magnitude of $O(N)$, i.e., in this particular case calculating with half of the network's theoretical computational power. This is a disadvantage that we have to accept in favor of a decentralized and reward-based cloud computing engine.
 
 \section*{Acknowledgement}
 
-I would like to express my sincere gratitude to everyone who has contributed to this paper with his encouragement and consistent involvement. This includes bitcointalk members ...
+We would like to express my sincere gratitude to everyone who has contributed to this paper with his encouragement and consistent involvement.
 
 
 \bibliographystyle{abbrv}
