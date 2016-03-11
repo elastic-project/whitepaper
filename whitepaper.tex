@@ -354,7 +354,7 @@ Once the buffer is full, the binary concatenation of buffer $B$ and the initial 
 
 Let us assume that each such sub-block $T_x$ of task $T$ has runtime $O(N)$ with $N$ being the number of operations in it. With the buffer-related overhead which itself is in $O(N)$, the attacker actually performs work in the order of $O(2 \cdot N) = O(N)$. So even if an attacker knows a shortcut to the algorithm so that it can be run in $N-x$ operations for some $x<N$ he can at most get a constant speedup: $O((N-x)+N) = O(2 \cdot N-x) = O(N)$.
 
-This of course means, that the network is coming at an overhead in the magnitude of $O(N)$, i.e., in this particular case calculating with half of the network's theoretical computational power. This is a disadvantage that we have to accept in favor of a decentralized and reward-based cloud computing engine.
+The buffer approach described above implies, that the network is coming at an overhead in the magnitude of $O(N)$, i.e., in this particular case calculating an arbitrary task $T$ with half of the network's theoretically possible computational power. This is a trade-off that we have to accept in favor of a decentralized and reward-based cloud computing engine.
 
 
 
