@@ -190,7 +190,7 @@
 
 \author{
 \alignauthor%
-The Community
+The Community, Revision 04
 }
 
 \maketitle
@@ -357,9 +357,11 @@ Let us assume that each such sub-block $T_x$ of task $T$ has runtime $\Theta(N)$
 Allowing arbitrary solutions to sub-blocks $T_x$ could allow the execution on the FAA attack.
 A possible attacker could identify a certain sub-block $T_x$ of which he knows a faster way obtain the buffer which is fed into the SHA256 function. This could allow him for being credited coins without performing any meaningful work. In order to mitigate this problem we do not allow arbitrary values for $x$. Instead, we suggest to set $x$ pseudo-randomly. This avoids the focus of malicious miners on particularily simple sub-blocks $T_x$. This alone, however, may lead to the problem, that people start caching their proof-of-work solutions (that match the required target of course) to all possible sub-blocks $T_x$ and run into a race condition when a particular $x$ is set for which many miners have cached proof-of-work solutions waiting in the queue.
 
+To avoid caching and precomputation, we introduce a so-called \emph{state} $S$ with a length of $32$ bit. The state is set globally and deterministically for the entire network and is influenced by the blocks that are confirmed. At this point, a fairly short block generation period is advised to have the state changed on a frequent basis. Above, we were talking about a \emph{modified} SHA256 function. The SHA256 function is modified in a way, that the initial state of the SHA256 function are the first 32 bits of the fractional parts of the square roots of the first 8 primes XOR'ed with the $32$ bit long state.
+This inherently reduces the problem caching/precalculation problem to an acceptable level\footnote{The block generation time and the frequency at which proof-of-work solutions are transmitted are parameters which influency this degree} as all cached proof-of-work solutions to an arbitrary $T_x$ are void the moment the state changes, i.e., a new proof-of-stake block is generated. 
+In this context, the cryptographically secure nature of state $S$ can be used directly to influence value $x$.
 
-To avoid caching, we introduce a so-called \emph{state} with a length of $32$ bit. The state is set globally and deterministically for the entire network and is influenced by the blocks that are confirmed. At this point, a fairly short block generation period is advised to have the state changed on a frequent basis. Above, we were talking about a \emph{modified} SHA256 function. The SHA256 function is modified in a way, that it does not just start with the first 32 bits of the fractional parts of the square roots of the first 8 primes XOR'ed with the $32$ bit long state.
-This solved the caching/precalculation problem as all cached proof-of-work solutions to an arbitrary $T_x$ are void the moment the state changes.
+\textbf{EK: Here we have to think about miners who will only focus on the currently active $x$ instead of the whole program.} 
 
 \section*{Acknowledgement}
 

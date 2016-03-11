@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.19)  11 MAR 2016 11:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.1.19)  11 MAR 2016 11:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -735,19 +735,23 @@ LaTeX Warning: Command \textless invalid in math mode on input line 312.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
+Underfull \hbox (badness 1308) in paragraph at lines 361--361
+\T1/aer/m/n/9 proof-of-work so-lu-tions are trans-mit-ted are pa-ram-e-ters
+ []
+
 (./whitepaper.bbl)
 - LAST -
-Extra skip:6.3885pt
-Left:503.5pt/1.74596pt
-Right:497.1115pt/1.74596pt
-Output:503.55574pt
+Extra skip:18.09708pt
+Left:666.0pt/0.0pt
+Right:531.41805pt/1.74596pt
+Output:514.07443pt
  [4] (./whitepaper.aux) ) 
 Here is how much of TeX's memory you used:
- 16569 strings out of 493054
- 345743 string characters out of 6140586
- 436150 words of memory out of 5000000
+ 16571 strings out of 493054
+ 345753 string characters out of 6140586
+ 440485 words of memory out of 5000000
  19719 multiletter control sequences out of 15000+600000
- 49155 words of font info for 65 fonts, out of 8000000 for 9000
+ 49805 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,71p,1112b,1131s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</u
@@ -761,7 +765,7 @@ ts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmti9.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.p
 fb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb>
-Output written on whitepaper.pdf (4 pages, 154002 bytes).
+Output written on whitepaper.pdf (4 pages, 158706 bytes).
 PDF statistics:
  69 PDF objects out of 1000 (max. 8388607)
  50 compressed objects within 1 object stream
