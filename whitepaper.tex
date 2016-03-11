@@ -190,7 +190,7 @@
 
 \author{
 \alignauthor%
-The Community
+The Community, Revision 04
 }
 
 \maketitle
@@ -338,7 +338,7 @@ As pointed out in Section~\ref{pow}, the general idea is to allow a computationa
 The workers (here, miners) then return the output of the arbitrary task, e.g., $[y_1,\ldots,y_l] = T(x_1,\ldots,x_k)$ along with a proof-of-work that the computation of $T$ was carried out correctly.
 If this proof-of-work matches certain criteria (such as a certain difficulty) it is then accepted by the network and the worker is rewarded.
 As we do not necessarily know how long the calculation of $T$ actually takes, it is required that the verification of this proof requires significantly less computational effort or time than
-computing $T(x_1,\ldots,x_k)$ itself. Everything else would expose the Elastic network to a variety of DOS attacks.
+computing $T(x_1,\ldots,x_k)$ itself---everything else would expose the Elastic network to a variety of DOS attacks.
 
 As, in our scheme, users are rewarded for contributing computational power, this proof-of-work must be secure. Otherwise, it can be assumed that dishonest users will find ways to return plausible results without performing any actual work. 
 Also we require mid-execution feedbacks, that allow for a more fine-granulated payout of rewards yet. That is, we also want to payout \emph{weaker} miners that not necessarily manage to calculate the arbitrary task until the end (or termination) before others have already consumed all $R$ reward coins. To mitigate this problem we need a way for everyone to constantly and periodically provide proof-of-works for sub-portions of the arbitrary task.
@@ -350,11 +350,18 @@ To achieve that, we introduce a buffer $B$ with length $L$, that is filled as fo
 After each executed statement, the ``number'' of the currently executed statement as well as the content of all variables that were ``touched'' (even if they have been assigned with the same value) are collected in a temporary binary string $Z$. The buffer $B$ gets then appended with $T$.
 Filling the buffer basically relates to executing the program. In fact, the buffer is assumed to be filled as a fixed rate as statements which change more variables will also take proportionately longer to execute. Statements like memory operations may cause some extra padding to the buffer as they, more likely, take longer to be executed (so they should fill the buffer more). Padding is a process whose parameters must be evaluated and seeded empirically.
 
-Once the buffer is full, the binary concatenation of buffer $B$ and the initial state at beginning of a sub-block is fed into a SHA256 function. A sub-block in the context is the fragment of code between an empty and an entirely filled Buffer and the initial state corresponds to the set of variables on the stack (including the function arguments). In fact, for practical reasons, SHA256 works sequential so this process can be performed meanwhile executing task $T$ itself. The length of the Buffer essentially defines the duration of the so-called sub-blocks. If the SHA256 hash meets a target value the miner has found a proof-of-work that is entitled to get a reward.
+Once the buffer is full, the binary concatenation of buffer $B$ and the initial state at the beginning of a sub-block $T_x$ of task $T$ is fed into a \emph{modified} SHA256 function. A sub-block $T_x$ in this context is the fragment of code between an empty and an entirely filled Buffer. The \emph{initial state} corresponds to the set of variables on the stack (including the function arguments). In fact, for practical reasons, SHA256 works sequentially so this process can be performed meanwhile executing $T_x$ itself. The length of the Buffer implicitly defines the duration of the so-called sub-blocks $T_x$. If the SHA256 hash meets a target value the miner has found a proof-of-work that is entitled to get a reward. In this context the proof-of-work, as it is submitted to the Elastic network, is composed by the index $x$ of sub-block $T-x$ and the initial state at beginning of a sub-block $T_x$.
 
-Let us assume that each such sub-block of ask $T$ has runtime $O(N)$ with $N$ being the number of operations in it. With the buffer-related overhead which itself is in $O(N)$, the attacker actually performs work in the order of $O(2 \cdot N) = O(N)$. So even if an attacker knows a shortcut to the algorithm so that it can be run in $N-x$ operations for some $x<N$ he can at most get a constant speedup: $O((N-x)+N) = O(2 \cdot N-x) = O(N)$.
+Let us assume that each such sub-block $T_x$ of task $T$ has runtime $\Theta(N)$ with $N$ being the number of operations in it. With the buffer-related overhead which itself is in $\Theta(N)$ an honest \emph{miner} performs work in the order of $\Theta(2 \cdot N) \in O(N)$. This implies that in practive the network is calculating an arbitrary task $T$ with half of the network's theoretically possible computational power. This is a trade-off that we have to accept in favor of a decentralized and reward-based cloud computing engine.
 
-This of course means, that the network is coming at an overhead in the magnitude of $O(N)$, i.e., in this particular case calculating with half of the network's theoretical computational power. This is a disadvantage that we have to accept in favor of a decentralized and reward-based cloud computing engine.
+Allowing arbitrary solutions to sub-blocks $T_x$ could allow the execution on the FAA attack.
+A possible attacker could identify a certain sub-block $T_x$ of which he knows a faster way obtain the buffer which is fed into the SHA256 function. This could allow him for being credited coins without performing any meaningful work. In order to mitigate this problem we do not allow arbitrary values for $x$. Instead, we suggest to set $x$ pseudo-randomly. This avoids the focus of malicious miners on particularily simple sub-blocks $T_x$. This alone, however, may lead to the problem, that people start caching their proof-of-work solutions (that match the required target of course) to all possible sub-blocks $T_x$ and run into a race condition when a particular $x$ is set for which many miners have cached proof-of-work solutions waiting in the queue.
+
+To avoid caching and precomputation, we introduce a so-called \emph{state} $S$ with a length of $32$ bit. The state is set globally and deterministically for the entire network and is influenced by the blocks that are confirmed. At this point, a fairly short block generation period is advised to have the state changed on a frequent basis. Above, we were talking about a \emph{modified} SHA256 function. The SHA256 function is modified in a way, that the initial state of the SHA256 function are the first 32 bits of the fractional parts of the square roots of the first 8 primes XOR'ed with the $32$ bit long state.
+This inherently reduces the problem caching/precalculation problem to an acceptable level\footnote{The block generation time and the frequency at which proof-of-work solutions are transmitted are parameters which influency this degree} as all cached proof-of-work solutions to an arbitrary $T_x$ are void the moment the state changes, i.e., a new proof-of-stake block is generated. 
+In this context, the cryptographically secure nature of state $S$ can be used directly to influence value $x$.
+
+\textbf{EK: Here we have to think about miners who will only focus on the currently active $x$ instead of the whole program.} 
 
 \section*{Acknowledgement}
 
